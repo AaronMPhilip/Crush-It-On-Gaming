@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Crush It On Gaming</title>
+  <title>Book Distribution Website</title>
   <style>
     #counter {
       font-family: monospace;
@@ -18,17 +18,19 @@
         color: rgb(47, 220, 255);
         font-size: 20px;
     }
-    marquee{  animation: marquee 20s linear infinite;}
   </style>
   <script>
-    let copiesLeft = 100; // Initial number of copies left
+    let copiesLeft; // Variable to store the number of copies left
 
     function updateCounter() {
       const counter = document.getElementById('counter');
       const downloadButton = document.getElementById('downloadButton');
-      
+
+      // Get the number of copies left from local storage or default to 100
+      copiesLeft = parseInt(localStorage.getItem('copiesLeft')) || 100;
+
       counter.innerText = copiesLeft + ' left'; // Update the counter text
-      
+
       if (copiesLeft === 0) {
         downloadButton.disabled = true; // Disable the download button when no copies are left
         downloadButton.innerText = 'No copies left';
@@ -42,6 +44,7 @@
 
     function downloadBook() {
       copiesLeft--; // Reduce the number of copies by 1
+      localStorage.setItem('copiesLeft', copiesLeft); // Store the updated value in local storage
       updateCounter(); // Update the counter after each download
       // Code to trigger the PDF download
       // Replace the following line with the actual download logic
@@ -54,8 +57,8 @@
     };
   </script>
 </head>
-<body><marquee behavior="scroll" direction="left" scrollamount="20">
-  <h1 id="counter"> 100 left</h1></marquee>
+<body>
+  <h1 id="counter">100 left</h1>
   <a id="downloadButton" onclick="downloadBook()">Click here to download</a>
 </body>
 </html>
