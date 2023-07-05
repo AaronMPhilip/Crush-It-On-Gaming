@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crush It On Gaming</title>
+  <style>
+    #counter {
+      font-family: monospace;
+      font-size: 24px;
+    }
+    body{
+        text-align: center;
+       background-color: black;
+    }
+    #counter{ color: greenyellow;
+        font-size: 50px;
+    }
+    #downloadButton{
+        color: rgb(47, 220, 255);
+        font-size: 20px;
+    }
+    marquee{  animation: marquee 20s linear infinite;}
+  </style>
+  <script>
+    let copiesLeft = 100; // Initial number of copies left
+
+    function updateCounter() {
+      const counter = document.getElementById('counter');
+      const downloadButton = document.getElementById('downloadButton');
+      
+      counter.innerText = copiesLeft + ' left'; // Update the counter text
+      
+      if (copiesLeft === 0) {
+        downloadButton.disabled = true; // Disable the download button when no copies are left
+        downloadButton.innerText = 'No copies left';
+      } else {
+        downloadButton.disabled = false;
+        downloadButton.innerText = 'Click here to download';
+        downloadButton.href = 'Book.pdf'; // Update the href attribute of the button
+        downloadButton.setAttribute('download', 'Book.pdf'); // Specify the file name for download
+      }
+    }
+
+    function downloadBook() {
+      copiesLeft--; // Reduce the number of copies by 1
+      updateCounter(); // Update the counter after each download
+      // Code to trigger the PDF download
+      // Replace the following line with the actual download logic
+      alert('PDF download triggered');
+    }
+
+    // Run this function when the page loads
+    window.onload = function() {
+      updateCounter();
+    };
+  </script>
+</head>
+<body><marquee behavior="scroll" direction="left" scrollamount="20">
+  <h1 id="counter"> 100 left</h1></marquee>
+  <a id="downloadButton" onclick="downloadBook()">Click here to download</a>
+</body>
+</html>
